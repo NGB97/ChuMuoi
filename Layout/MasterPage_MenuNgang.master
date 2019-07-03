@@ -1,0 +1,381 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage_MenuNgang.master.cs" Inherits="Layout_MasterPage_MenuNgang" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Phần Mềm Quản Lý Bán Sỉ Quần Áo</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="https://xep.vn/images/mypics/icon100.png" type="image/x-icon" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../css/fullcalendar.css" />
+    <link rel="stylesheet" href="../css/maruti-style.css" />
+    <link rel="stylesheet" href="../css/maruti-media.css" class="skin-color" />
+    <link href="../css/style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/datepicker.css" />
+    <link rel="stylesheet" href="../css/uniform.css" />
+    <link rel="stylesheet" href="../css/select2.css" />
+    <link href="../css/style.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500&amp;subset=vietnamese" rel="stylesheet">
+
+    <link href="../css/kv-css.css" rel="stylesheet" />
+    <%--<link href="../css/font-awesome.min.css" rel="stylesheet" />--%>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link href="../PlugIn/Semantic/semantic.min.css" rel="stylesheet" />
+    <script src="../PlugIn/Semantic/semantic.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <%--<link rel="stylesheet" href="../css/bootstrap-theme.min.css"/>--%>
+    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />--%>
+    <%--    --%>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>--%>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+    <script src="../js/select2.min.js"></script>
+    <script src="../js/maruti.js"></script>
+    <link href="../plugins/colorpicker/bootstrap-colorpicker.css" rel="stylesheet" />
+
+    <script src="../plugins/colorpicker/bootstrap-colorpicker.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../plugins/datetimePicker1/jquery.datetimepicker.css" />
+
+
+
+
+    <script type="text/javascript">
+        function DangXuat() { 
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    if (xmlhttp.responseText == "True") { 
+                        window.location = "../Home/DangNhap.aspx";
+                    }
+                    else {
+                        // alert("Lỗi !")
+                        alert(xmlhttp.responseText);
+                        // window.location = "../Home/DangNhap.aspx";
+                    }
+                }
+            }
+            xmlhttp.open("GET", "../Ajax.aspx?Action=DangXuat", true);
+            xmlhttp.send();
+        }
+        function format_curency(a) {
+            //a.value = a.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+
+            var money = a.value.replace(/\./g, "");
+            if (isNaN(money) == true) {
+                money = money.substring(0, money.length - 1);
+            }
+            a.value = money.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+        }
+    </script>
+    <style type="text/css">
+        .a-Tag {
+            display: block;
+            padding: 11px !important;
+            width: 100%;
+            height: 100%;
+        }
+
+        .li-Tag {
+            padding: 0 !important;
+            display: inherit;
+        }
+
+        .my-logo {
+            color: #08c;
+            font-weight: bold;
+            font-size: 15px;
+            border: solid 3px #0084d252;
+            padding: 10px;
+            margin-left: 3px;
+            font-family: 'Cabin', sans-serif;
+            border-style: double;
+        }
+
+        @media only screen and (max-width: 1050px) {
+            left > div {
+                max-width: 247px;
+            }
+
+                left > div > sub > img {
+                    width: 15%;
+                    height: 15%;
+                    /*display:none;*/
+                }
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <!--Header-part-->
+    <div id="header" style="padding-top: 12px;">
+
+
+        <div>
+            <sub class="my-logo">Phần Mềm Quản Lý Bán Sỉ Quần Áo</sub>
+
+        </div>
+    </div>
+    <!--close-Header-part-->
+
+    <!--top-Header-messaages-->
+    <div class="btn-group rightzero"><a class="top_message tip-left" title="Manage Files"><i class="icon-file"></i></a><a class="top_message tip-bottom" title="Manage Users"><i class="icon-user"></i></a><a class="top_message tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a> <a class="top_message tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a></div>
+    <!--close-top-Header-messaages-->
+
+    <link href="../css/w3.css" rel="stylesheet" />
+
+    <!--top-Header-menu-->
+    <div id="user-nav" class="navbar navbar-inverse">
+        <ul class="nav">
+
+
+
+            <li class=""><a data-toggle="modal"><i class="fa fa-user SizeLon" style="margin-top: 3px;"></i><span id="lbTenDangNhap" runat="server" class="text">Nguyễn Văn A</span></a></li>
+
+            <li class=""><a style="cursor: pointer" onclick="DangXuat();"><i class="fa fa-sign-out SizeLon" style="margin-top: 3px;"></i><span class="text">Đăng xuất</span></a></li>
+        </ul>
+    </div>
+
+
+
+    <%--  Popup thong tin người dùng--%>
+
+    <div id="myAlert" class="modal hide">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3 style="font-size: 15px; color: white; text-shadow: none; font-weight: bold;">Thông tin người dùng</h3>
+        </div>
+        <div class="modal-body">
+
+
+
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="col-md-3">
+                        <label class="control-label">Mã hàng (*): </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input id="Text10" runat="server" type="text" />
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                </div>
+
+            </div>
+
+
+            <div class="row-fluid">
+                <div class="span6">
+
+
+
+
+
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Tên người dùng: </label>
+                                <div class="controls">
+                                    <input class="span12" data-val="true" data-val-required="" id="Text1" runat="server" name="Content.ContentName" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Tên đăng nhập: </label>
+                                <div class="controls">
+                                    <input class="span12" data-val="true" data-val-required="" id="Text2" runat="server" name="Content.ContentName" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Vai trò:  <span>Admin</span> </label>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row-fluid" style="border-bottom: solid 1px #CDCDCD">
+                    </div>
+
+                    <div class="row-fluid" style="font-size: 16px; font-weight: bold">
+                        Đổi mật khẩu
+                    </div>
+
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Mật khẩu cũ: </label>
+                                <div class="controls">
+                                    <input class="span12" data-val="true" data-val-required="" id="Text3" runat="server" name="Content.ContentName" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Mật khẩu mới: </label>
+                                <div class="controls">
+                                    <input class="span12" data-val="true" data-val-required="" id="Text4" runat="server" name="Content.ContentName" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Nhập lại mật khẩu mới: </label>
+                                <div class="controls">
+                                    <input class="span12" data-val="true" data-val-required="" id="Text5" runat="server" name="Content.ContentName" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="span6">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Điện thoại: </label>
+                                <div class="controls">
+                                    <input class="span12" data-val="true" data-val-required="" id="Text6" runat="server" name="Content.ContentName" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Email: </label>
+                                <div class="controls">
+                                    <input class="span12" data-val="true" data-val-required="" id="Text7" runat="server" name="Content.ContentName" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Địa chỉ: </label>
+                                <div class="controls">
+                                    <input class="span12" data-val="true" data-val-required="" id="Text8" runat="server" name="Content.ContentName" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="control-group">
+                                <label class="control-label">Ngày sinh:</label>
+                                <div class="controls">
+                                    <input class="span12" data-val="true" data-val-required="" id="Text9" runat="server" name="Content.ContentName" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="modal-footer"><a data-dismiss="modal" class="btn btn-primary" href="#">Cập nhật</a> <a data-dismiss="modal" class="btn" href="#">Đóng</a> </div>
+    </div>
+
+    <%-- Hết Popup thong tin người dùng--%>
+
+
+    <div id="sidebar" runat="server">
+        <a href="#" class="visible-phone"><i class="icon icon-align-justify" style="margin-top: -1px;"></i><span style="font-size: 14px;">DANH MỤC QUẢN LÝ</span></a>
+    </div>
+    <div id="content" style="padding: 0 25px;">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+    <div class="row-fluid">
+        <div id="footer" class="span12">2017 &copy; Được thiết kết bởi <a href="https://xep.vn">công ty phần mềm  XEP</a></div>
+    </div>
+
+
+    <script src="../js/excanvas.min.js"></script>
+
+
+    <script src="../js/jquery.peity.min.js"></script>
+    <script src="../js/fullcalendar.min.js"></script>
+
+    <script src="../js/maruti.chat.js"></script>
+
+    <script src="../js/select2.min.js"></script>
+
+</body>
+</html>
