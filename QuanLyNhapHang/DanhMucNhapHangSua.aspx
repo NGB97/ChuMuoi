@@ -10,8 +10,7 @@
         ThemNhanh.Expires = DateTime.Now.AddDays(-1d);
         Response.Cookies.Add(ThemNhanh);
         %>
-
-              <%
+        <%
         HttpCookie SuaNhapNhanh2 = new HttpCookie("SuaNhapNhanh2", "");
         SuaNhapNhanh2.Expires = DateTime.Now.AddDays(-1d);
         Response.Cookies.Add(SuaNhapNhanh2);
@@ -1402,39 +1401,34 @@
                                         <div class="coninput1">
                                             <div class="titleinput"><b>Màu(*): </b></div>
                                             <div class="txtinput">
-                                                <center>      <select  class="form-control" data-val="true" data-val-required="" id="slSize" runat="server" name="Content.ContentName"  >
-                                                   
-                                                      </select></center>
-
+                                                <center>
+                                                    <select  class="form-control" data-val="true" data-val-required="" id="slSize" runat="server" name="Content.ContentName"  >
+                                                    </select>
+                                                </center>
                                             </div>
                                         </div>
                                         <div class="coninput1">
                                             <div class="titleinput"><b>Số lượng(*): </b></div>
-                                            <div class="txtinput">
-
-                                                <center> 
-                                        <input  class="form-control" data-val="true" data-val-required="" id="txtSoLuong" runat="server" name="Content.ContentName" type="text" value="0" onkeyup="TinhTien2();" />
-</center>
+                                        <div class="txtinput">
+                                        <center> 
+                                             <input  class="form-control" data-val="true" data-val-required="" id="txtSoLuong" runat="server" name="Content.ContentName" type="text" value="0" onkeyup="TinhTien2();" />
+                                        </center>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="dvnull">&nbsp;</div>
-
                                         <div class="coninput1">
                                             <div class="titleinput"><b>Giá nhập(*): </b></div>
                                             <div class="txtinput">
-
-                                                <center>      <input onkeyup="TinhTien();" class="form-control" data-val="true" data-val-required="" id="txtGiaNhap" runat="server" name="Content.ContentName" value="0" />
-                                                   
-                                                      </center>
+                                                <center>
+                                                    <input onkeyup="TinhTien();" class="form-control" data-val="true" data-val-required="" id="txtGiaNhap" runat="server" name="Content.ContentName" value="0" />
+                                                </center>
                                             </div>
                                         </div>
-
+                                       
                                     </div>
 
                                 </div>

@@ -48,9 +48,9 @@ public partial class Ajax : System.Web.UI.Page
         DataTable table = Connect.GetTable("select IDLoaiHangHoa,TenLoaiHangHoa,MaLoaiHangHoa from LoaiHangHoa");
 
         string html = @"<table border='1' style='width:100%;' class='table table-bordered table-striped'><tr>
-<th>STT</th><th>Tên hàng</th><th>Giá</th>
-</tr>
-";
+        <th>STT</th><th>Tên hàng</th><th>Giá</th>
+        </tr>
+        ";
         for (int i = 0; i < table.Rows.Count; i++)
         {
             html += "<tr>";
@@ -67,17 +67,9 @@ public partial class Ajax : System.Web.UI.Page
              }
              else
                  html += "<td><input disabled='disabled' type='text' onkeyup='TinhTienSo(" + table.Rows[i]["IDLoaiHangHoa"].ToString().Trim() + ");' id='gia_" + table.Rows[i]["IDLoaiHangHoa"].ToString().Trim() + "' value='0' /><a style='cursor:pointer;' onclick='CapNhatGiaoChoKhach(" + table.Rows[i]["IDLoaiHangHoa"].ToString().Trim() + ")' ><img id='hinhthoi_" + table.Rows[i]["IDLoaiHangHoa"].ToString().Trim() + "' src='../images/Edit.png' height='30' width='30' /></a></td>";
-
-
             html += "</tr>";
         }
-
-  
-
      html += @"</table><br/>";
-
-   
-
      Response.Write(html);
     }
 

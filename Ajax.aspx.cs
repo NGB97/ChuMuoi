@@ -316,8 +316,31 @@ public partial class Ajax : System.Web.UI.Page
 
             case "InChiTietVaSua":
                 InChiTietVaSua(); break;
+            case "LoaiKhachHang":
+                LoaiKhachHang(); break;
         }
     }
+    private void LoaiKhachHang()
+    {
+        string sql = "SELECT * from KhachHangNhom";
+        DataTable table = Connect.GetTable(sql);
+        string listgAutocomplete = "[";
+      
+        for (int i = 0; i < table.Rows.Count; i++)
+        {
+            listgAutocomplete += "{";
+            listgAutocomplete += "value: '" + table.Rows[i]["TenNhomKH"].ToString() + "',";
+            listgAutocomplete += "label: '" + table.Rows[i]["TenNhomKH"].ToString() + "-" + table.Rows[i]["TenLoaiKH"].ToString() + "',";
+            listgAutocomplete += "id: '" + table.Rows[i]["idNhomKH"].ToString() + "'";
+            if (i == table.Rows.Count - 1)
+                listgAutocomplete += "}";
+            else
+                listgAutocomplete += "},";
+        }
+        listgAutocomplete += "]";
+        Response.Write(listgAutocomplete);
+    }
+
     private void InChiTietVaSua()
     {
         string IDPhieuXuat = StaticData.ValidParameter(Request.QueryString["IDPhieuXuat"].Trim());

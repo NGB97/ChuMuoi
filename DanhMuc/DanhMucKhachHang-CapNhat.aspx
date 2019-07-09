@@ -1,7 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Layout/MasterPage.master" AutoEventWireup="true" CodeFile="DanhMucKhachHang-CapNhat.aspx.cs" Inherits="DanhMuc_DanhMucKhachHang_CapNhat" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <script src="../js/jquery-1.12.4.js"></script>
+    <script src="../dist/jquery-ui-1.11.3/jquery-ui.js"></script>
+    <link href="../dist/jquery-ui-1.11.3/jquery-ui.css" rel="stylesheet"/>
     <script>
+        window.onload = function () {
+            LoadLoaiKhachHang();
+        }
         function MoXemGiayPhepLaiXe() {
             document.getElementById('lightXemGiayPhepLaiXe').style.display = 'block';
             document.getElementById('fadeXemGiayPhepLaiXe').style.display = 'block';
@@ -10,6 +16,52 @@
             document.getElementById('lightXemGiayPhepLaiXe').style.display = 'none';
             document.getElementById('fadeXemGiayPhepLaiXe').style.display = 'none';
         }
+        function LoadLoaiKhachHang() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    if (xmlhttp.responseText != "") {
+                        var txt = xmlhttp.responseText
+                            .replace(/[\"]/g, '\\"')
+                            .replace(/[\\]/g, '\\\\')
+                            .replace(/[\/]/g, '\\/')
+                            .replace(/[\b]/g, '\\b')
+                            .replace(/[\f]/g, '\\f')
+                            .replace(/[\n]/g, '\\n')
+                            .replace(/[\r]/g, '\\r')
+                            .replace(/[\t]/g, '\\t');
+
+                        var listgAutocomplete = eval("(" + txt + ")");
+                        $("#ContentPlaceHolder1_txtLoaiKhachHang").autocomplete({
+                            minLength: 0,
+                            source: listgAutocomplete,
+                            focus: function (event, ui) {
+                                $("#ContentPlaceHolder1_txtLoaiKhachHang").val(ui.item.label);
+                                return false;
+                            },
+                            select: function (event, ui) {
+                                $("#ContentPlaceHolder1_txtLoaiKhachHang").val(ui.item.value);
+                                $("#ContentPlaceHolder1_idLoaiKhachHang").val(ui.item.id);
+                                return false;
+                            }
+                        })
+                    }
+                    else {
+                        alert("Lỗi!")
+                    }
+
+                }
+            }
+            xmlhttp.open("GET", "../Ajax.aspx?Action=LoaiKhachHang", true);
+            xmlhttp.send();
+        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -27,13 +79,13 @@
                         <div class="coninput1">
                           <div class="titleinput"><b>Mã khách hàng(*):</b></div>
                           <div class="txtinput">
-                              <input class="form-control" data-val="true" data-val-required="" id="txtMaKhachHang" runat="server" name="Content.ContentName" type="text" value="" />
+                              <input class="form-control" data-val="true" data-val-required="" id="txtMaKhachHang" autocomplete="off" runat="server" name="Content.ContentName" type="text" value="" />
                           </div>
                         </div>
                         <div class="coninput2">
                           <div class="titleinput"><b>Tên khách hàng(*):</b></div>
                           <div class="txtinput">
-                              <input class="form-control" data-val="true" data-val-required="" id="txtTenKhachHang" runat="server" name="Content.ContentName" type="text" value="" />
+                              <input class="form-control" data-val="true" data-val-required="" autocomplete="off" id="txtTenKhachHang" runat="server" name="Content.ContentName" type="text" value="" />
                           </div>
                         </div>
                       </div>
@@ -79,10 +131,8 @@
                         <div class="coninput1">
                               <div class="titleinput"><b>Loại khách hàng:</b></div>
                               <div class="txtinput">
-                                  <select class="form-control" data-val="true" style="font-weight:bold" data-val-required="" id="txtLoaiKhachHang" runat="server" name="Content.ContentName" type="text" value="">
-                                      <option value="Khách lẻ" style="font-weight:bold"></option>
-                                      <option value ="Khách sỉ"  style="font-weight:bold"></option>
-                                    </select>
+                                  <input class="form-control" data-val="true" data-val-required="" id="txtLoaiKhachHang" onchange="LoadLoaiKhachHang()" runat="server" name="Content.ContentName" type="text" value=""/>
+                                    <input type="hidden" id="idLoaiKhachHang" runat="server" />
                               </div>
                          </div>
                         <div class="coninput2">

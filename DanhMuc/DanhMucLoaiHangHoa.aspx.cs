@@ -283,13 +283,16 @@ public partial class DanhMuc_DanhMucKhachHang : System.Web.UI.Page
                         <th class='th'>
                           Thuộc loại hàng hóa
                         </th>
-                     <th class='th'>
+                        <th class='th'>
                          Đơn vị tính
+                        </th>
+                        <th class='th'>
+                           Giá Bán
                         </th>
                         <th class='th'>
                            
                         </th>
-                        <th class='th'>
+                        <th colspan='2' class='th'>
                            
                         </th>
                     </tr>";
@@ -310,8 +313,9 @@ public partial class DanhMuc_DanhMucKhachHang : System.Web.UI.Page
 
             html += "       <td style='vertical-align:middle;'>" + StaticData.getField("LoaiHangCapCao", "TenLoaiHangCapCao", "IDLoaiHangCapCao", table.Rows[i]["IDLoaiHangCapCao"].ToString()) + "</td>";
             html += "       <td style='vertical-align:middle;'>" + StaticData.getField("DonViTinh", "TenDonViTinh", "IDDonViTinh", table.Rows[i]["IDDonViTinh"].ToString()) + "</td>";
-            html += " <td style='text-align:center;font-size: 100%;vertical-align:middle;'><a href='#' onclick='window.location=\"DanhMucLoaiHangHoaSua.aspx?Page=" + Page.ToString() + "&IDLoaiHangHoa=" + table.Rows[i]["IDLoaiHangHoa"].ToString() + "\"'><img title='Sửa' class='imgCommand' src='../Images/edit.png'  /> Sửa </a></td>";
-            html += " <td style='text-align:center;font-size: 100%;vertical-align:middle;'><a href='#' onclick='DeleteKhachHang(\"" + table.Rows[i]["IDLoaiHangHoa"].ToString() + "\")'><img title='Xóa' class='imgCommand' src='../Images/delete.png'  />Xóa</a></td>";
+            html += " <td style='text-align:center;font-size: 100%;vertical-align:middle;'><a href='#' onclick='window.location=\"DanhMucGiaBan.aspx?Page=" + Page.ToString() + "&IDLoaiHangHoa=" + table.Rows[i]["IDLoaiHangHoa"].ToString() + "\"'><img title='Giá bán' class='imgCommand' src='../Images/edit.png'  />Giá bán</a></td>";
+            html += " <td style='text-align:center;font-size: 100%;vertical-align:middle;'><a href='#' onclick='window.location=\"DanhMucLoaiHangHoaSua.aspx?Page=" + Page.ToString() + "&IDLoaiHangHoa=" + table.Rows[i]["IDLoaiHangHoa"].ToString() + "\"'><img title='Sửa' class='imgCommand' src='../Images/edit.png'  /></a></td>";
+            html += " <td style='text-align:center;font-size: 100%;vertical-align:middle;'><a href='#' onclick='DeleteKhachHang(\"" + table.Rows[i]["IDLoaiHangHoa"].ToString() + "\")'><img title='Xóa' class='imgCommand' src='../Images/delete.png'  /></a></td>";
             html += "       </tr>";
 
         }

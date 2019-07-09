@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
         <script src="../dist/jquery-ui-1.11.3/jquery-ui.js"></script>
-    <link href="../dist/jquery-ui-1.11.3/jquery-ui.css" rel="stylesheet"/>
+        <link href="../dist/jquery-ui-1.11.3/jquery-ui.css" rel="stylesheet"/>
       <script>
           window.onload = function () {
               TenKhachTheoSanPhamAutocomplete();
@@ -33,7 +33,6 @@
               xmlhttp.open("GET", "../Ajax6.aspx?Action=listsanpham&IDKhachHang=" + IDKhachHang, true);
               xmlhttp.send();
           }
-
 
           //
           function TenSanPhamTheoKhachAutocomplete() {
@@ -218,8 +217,6 @@
              );
           }
 
-
-
           function TinhTienSo(IDLoaiHangHoa) {
 
 
@@ -239,9 +236,6 @@
               
 
           }
-
-
-
 
           function CapNhatGiaoChoKhach(IDLoaiHangHoa) {
               var check = document.getElementById("gia_" + IDLoaiHangHoa);
@@ -279,8 +273,6 @@
 
           }
               
-
-          
         </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
